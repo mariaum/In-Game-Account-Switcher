@@ -17,11 +17,10 @@ import java.io.IOException;
  */
 public abstract class AbstractAccountGui extends GuiScreen
 {
-	private final String actionString;
-	private GuiTextField username;
-	private GuiTextField password;
-	private GuiButton complete;
-	protected boolean hasUserChanged = false;
+	protected final String actionString;
+	protected GuiTextField username;
+	protected GuiTextField password;
+	protected GuiButton complete;
 
 	public AbstractAccountGui(String actionString)
 	{
@@ -72,8 +71,6 @@ public abstract class AbstractAccountGui extends GuiScreen
 			// GuiTextField checks if it's focused before doing anything
 			username.textboxKeyTyped(character, keyIndex);
 			password.textboxKeyTyped(character, keyIndex);
-			if(username.isFocused())
-				hasUserChanged = true;
 		}
 	}
 
@@ -114,7 +111,7 @@ public abstract class AbstractAccountGui extends GuiScreen
 	/**
 	 * Return to the Account Selector
 	 */
-	private void escape(){
+	protected void escape(){
 		mc.displayGuiScreen(new GuiAccountSelector());
 	}
 

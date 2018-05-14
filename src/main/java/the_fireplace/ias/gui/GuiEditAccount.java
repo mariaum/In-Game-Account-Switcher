@@ -15,6 +15,9 @@ class GuiEditAccount extends AbstractAccountGui {
 	private final ExtendedAccountData data;
 	private final int selectedIndex;
 
+	private String currentUsername;
+	private String currentPassword;
+
 	public GuiEditAccount(int index){
 		super("ias.editaccount");
 		this.selectedIndex=index;
@@ -25,19 +28,27 @@ class GuiEditAccount extends AbstractAccountGui {
 		}else{
 			this.data = new ExtendedAccountData(data.user, data.pass, data.alias, 0, JavaTools.getJavaCompat().getDate(), EnumBool.UNKNOWN);
 		}
+
+		this.currentUsername = EncryptionTools.decode(data.user);
+		this.currentPassword = EncryptionTools.decode(data.pass);
 	}
 
 	@Override
 	public void initGui() {
 		super.initGui();
-		setUsername(EncryptionTools.decode(data.user));
-		setPassword(EncryptionTools.decode(data.pass));
+		setUsername(this.currentUsername);
+		setPassword(this.currentPassword);
 	}
 
 	@Override
 	public void complete()
 	{
-		AltDatabase.getInstance().getAlts().set(selectedIndex, new ExtendedAccountData(getUsername(), getPassword(), hasUserChanged ? getUsername() : data.alias, data.useCount, data.lastused, data.premium));
+		AltDatabase.getInstance().getAlts().set(selectedIndex, new ExtendedAccountData(getUsername(), getPassword(), getUsername(), data.useCount, data.lastused, data.premium));
+	}
+
+	@Override
+	public boolean canComplete() {
+		return !this.password.getText().equals(this.currentPassword) || !this.username.getText().equals(this.currentUsername);
 	}
 
 }
