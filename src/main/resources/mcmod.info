@@ -6,7 +6,6 @@
   "version": "${version}",
   "mcversion": "1.8.9",
   "url": "http://mods.curse.com/mc-mods/minecraft/232676-in-game-account-switcher",
-  "updateUrl": "http://mods.curse.com/mc-mods/minecraft/232676-in-game-account-switcher",
   "authorList": ["The_Fireplace","The_BrainStone"],
   "credits": "deFENCE_(aka MRebhan), Elvm",
   "logoFile": "iaslogo.png",
